@@ -1,12 +1,14 @@
 const display = document.getElementById('time-display');
-const buttonStart = document.getElementById('btn-start');
 
 // time is stored in milliseconds
 const time = {
     current: 0,
     target: 0,
-    countDown: false
+    countDown: false,
+    alarm: new Audio('./media/Powerup26.wav')
 }
+
+const tabText = document.getElementById('tab-text');
 
 const displayUpdate = function() {
     let temp = time.current;
@@ -26,6 +28,7 @@ const displayUpdate = function() {
         minimumIntegerDigits: 3
     });
     display.innerHTML = `${min}:${sec}.${mil}`;
+    tabText.innerHTML = `${min}:${sec} Time Manager`;
 }
 
 const timeReset = function(newTime = 25) {
@@ -36,9 +39,16 @@ const timeReset = function(newTime = 25) {
 
 timeReset();
 
+time.alarm.volume = 0.2;
+
 const timeUpdate = function() {
     const check = new Date().getTime();
     time.current = time.target - check;
+    if (time.current < 0) {
+        time.current = 0;
+        time.countDown = false;
+        time.alarm.play();
+    }
 }
 
 setInterval(function() {
@@ -47,6 +57,8 @@ setInterval(function() {
         displayUpdate();
     }
 }, 100);
+
+const buttonStart = document.getElementById('btn-start');
 
 countDownStart = function() {
     time.countDown = true;
