@@ -5,3 +5,11 @@
 #time-display {
     font-size: 100px;
 }
+
+button {
+    min-width: 200px;
+}
+
+button::-moz-focus-inner {
+    border: 0;
+}

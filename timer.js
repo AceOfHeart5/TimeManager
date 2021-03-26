@@ -1,11 +1,9 @@
 const display = document.getElementById('time-display');
 const buttonStart = document.getElementById('btn-start');
-const buttonReset = document.getElementById('btn-reset');
 
 // time is stored in milliseconds
 const time = {
     current: 0,
-    set: 25 * 60 * 1000,
     target: 0,
     countDown: false
 }
@@ -30,9 +28,8 @@ const displayUpdate = function() {
     display.innerHTML = `${min}:${sec}.${mil}`;
 }
 
-const timeReset = function() {
-    console.log('time reset');
-    time.current = time.set;
+const timeReset = function(newTime = 25) {
+    time.current = newTime * 60 * 1000;
     time.target = new Date().getTime() + time.current;
     displayUpdate();
 }
@@ -51,15 +48,33 @@ setInterval(function() {
     }
 }, 100);
 
+countDownStart = function() {
+    time.countDown = true;
+    buttonStart.innerHTML = 'pause';
+    time.target = new Date().getTime() + time.current;
+}
+
+countDownPause = function() {
+    time.countDown = false;
+    buttonStart.innerHTML = 'start';
+}
+
 buttonStart.onclick = function() {
     if (time.countDown) {
-        time.countDown = false;
-        buttonStart.innerHTML = 'start';
+        countDownPause();
     } else {
-        time.countDown = true;
-        buttonStart.innerHTML = 'pause';
-        time.target = new Date().getTime() + time.current;
+        countDownStart();
     }
 }
 
-buttonReset.onclick = timeReset;
+const buttonMinutes = new Map();
+buttonMinutes.set(25, document.getElementById('btn-set-25'));
+buttonMinutes.set(5, document.getElementById('btn-set-5'));
+buttonMinutes.set(10, document.getElementById('btn-set-10'));
+
+buttonMinutes.forEach((button, minutes) => {
+    button.onclick = function() {
+        timeReset(minutes);
+        countDownPause();
+    }
+});
