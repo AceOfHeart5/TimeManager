@@ -1,6 +1,9 @@
 const speed = 1000;
 const display = document.getElementById('time-display');
 const buttonStart = document.getElementById('btn-start');
+const buttonStop = document.getElementById('btn-stop');
+
+let countingDown = false;
 
 const time = {
     current: {
@@ -8,16 +11,26 @@ const time = {
         sec: 0
     },
     set: {
-        min: 2,
+        min: 25,
         sec: 0
     }
 }
 
 const updateDisplay = function() {
-    display.innerHTML = `${time.current.min}:${time.current.sec}`;
+    let result = '';
+    result += time.current.min.toLocaleString('en-US', {
+        minimumIntegerDigits: 2,
+    });
+    result += ":";
+    result += time.current.sec.toLocaleString('en-US', {
+        minimumIntegerDigits: 2,
+    });
+    display.innerHTML = result;
 }
 
 const decreaseTime = function() {
+    let hitZero = false;
+
     time.current.sec -= 1;
 
     if (time.current.sec < 0) {
@@ -28,22 +41,38 @@ const decreaseTime = function() {
     if (time.current.min < 0) {
         time.current.min = 0;
         time.current.sec = 0;
+        hitZero = true;
     }
+
+    return hitZero;
 }
 
 const tick = function () {
-    decreaseTime();
-    if (!(time.current.min === 0 && time.current.sec === 0)) {
+    if (!countingDown) return;
+    let done = decreaseTime();
+    if (done) {
+        countingDown = false;
+    } else {
         setTimeout(tick, speed);
     }
     updateDisplay();
 }
 
-const timerStart = function() {
-    time.current.min = time.set.min;
-    time.current.sec = time.set.sec;
-    tick();
+buttonStart.onclick = function() {
+    console.log(countingDown);
+    if (countingDown === true) {
+        buttonStart.innerHTML = 'start';
+        countingDown = false;
+    } else {
+        buttonStart.innerHTML = 'pause';
+        countingDown = true;
+        tick();
+    }
 }
 
-buttonStart.onclick = timerStart;
-console.log(buttonStart);
+buttonStop.onclick = function() {
+    countingDown = false;
+    time.current.min = time.set.min;
+    time.current.sec = time.set.sec;
+    updateDisplay();
+};
