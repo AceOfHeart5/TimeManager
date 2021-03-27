@@ -8,17 +8,32 @@ let prevTime = 0;
 
 function App() {
 
-	const [tick, setTick] = useState(0);
-	const [count, setCount] = useState(true);
+	/*
+	Updating the tick should always trigger a re-render. But often the
+	tick value will be the same as the previous tick value. So we wrap
+	the value in this object with a 'change'flag. This effect watches
+	the tick and sets the flag false after changing. 
+	*/
+	const [tick, setTick] = useState({value: 0, change: false});
+	useEffect(() => {
+		if (tick.change) {
+			setTick({
+				value: tick.value,
+				change: false
+			})
+		}
+	}, [tick])
 
+	// On App start, create interval loop.
 	useEffect(() => {
 		prevTime = new Date().getTime();
 		setInterval(() => {
-			if (count) {
-				let current = new Date().getTime();
-				setTick(current - prevTime);
-				prevTime = current;
-			}
+			let current = new Date().getTime();
+			setTick({
+				value: current - prevTime,
+				change: true
+			});
+			prevTime = current;
 		}, 100);
 	}, []);
 
