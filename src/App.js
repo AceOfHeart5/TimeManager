@@ -1,25 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState, useEffect } from 'react';
+import Timer from './Timer';
+import Tasks from './Tasks';
+
+// time will be kept in milliseconds
+let prevTime = 0;
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+	const [tick, setTick] = useState(0);
+	const [count, setCount] = useState(true);
+
+	useEffect(() => {
+		prevTime = new Date().getTime();
+		setInterval(() => {
+			if (count) {
+				let current = new Date().getTime();
+				setTick(current - prevTime);
+				prevTime = current;
+			}
+		}, 100);
+	}, []);
+
+	return (
+		<div className="App">
+			<Timer tick={tick}></Timer>
+			<Tasks></Tasks>
+		</div>
+	);
 }
 
 export default App;
