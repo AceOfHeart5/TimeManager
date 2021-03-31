@@ -2,31 +2,31 @@ import { useState, useEffect } from 'react';
 
 let tickPrevID = null;
 
-const Pomodoro = ({tick, count}) => {
-
-    console.log("timer function ran");
-    const counting = count.counting;
-    const setCounting = count.setCounting;
+const Pomodoro = ({ tick, timer }) => {
     const [time, setTime] = useState(0);
-    if (tick.id !== tickPrevID && counting) {
-        tickPrevID = tick.id;
-        console.log(time);
-        if (tick.value >= time) {
-            setTime(0);
-        } else {
-            setTime(time - tick.value);
-        }
-    }
+
+    console.log("pomodoro re-rendered: " + time);
 
     // newMins is the new time to set the time in minutes
     const setTimer = (newMins) => {
-        setCounting(false);
         setTime(newMins * 60 * 1000);
     }
 
     useEffect(() => {
+        console.log(`setting time to 25 minutes`);
         setTimer(25);
     }, []);
+
+    /*
+    When the pomodoro is re-rendered, we need to check if the tick value 
+    changed. We can be sure it's changed if the ID of the tick is 
+    different.
+    */
+    if (tick.id !== tickPrevID) {
+        tickPrevID = tick.id;
+        console.log(`Setting time to: ${time - tick.timePassed}`);
+        setTime(time - tick.timePassed);
+    }
 
     // setMins is an array of integers representing minute values timer can be set to
     const getSetButtons = (setMins) => {
@@ -39,11 +39,12 @@ const Pomodoro = ({tick, count}) => {
         return <ul>{result}</ul>;
     }
 
-    const toggleAccumulate = () => {
-        setCounting(!counting);
+    const toggleTimer = () => {
+        timer.startToggle();
     }
 
     const getDisplay = () => {
+        console.log(`Rendering time: ${time}`);
         let temp = time;
         let minutes = Math.floor(temp / 1000 / 60);
         temp -= (minutes * 60 * 1000);
@@ -65,7 +66,7 @@ const Pomodoro = ({tick, count}) => {
     return (
         <div className="timer">
             <h1 className="display">{getDisplay()}</h1>
-            <button onClick={toggleAccumulate} className="btn-startpause">start/pause</button>
+            <button onClick={toggleTimer} className="btn-startpause">start/pause</button>
             {getSetButtons([1, 5, 10, 15, 25, 30])}
         </div>
     );

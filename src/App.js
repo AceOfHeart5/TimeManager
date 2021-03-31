@@ -4,33 +4,23 @@ import Timer from './util/Timer';
 import Pomodoro from './components/Pomodoro';
 import Tasks from './components/Tasks';
 
-// time will be kept in milliseconds
-let prevTime = 0;
-const tick = {
-	value: 0,
-	id: 0
-}
+const timer = new Timer();
 
 function App() {
 
-	console.log("app function run: " + tick.id);
-	const [counting, setCounting] = useState(false);
-
-	// On App start, create interval loop.
+	/*
+	We could have stored all the data for the timer in the timer, but
+	chose to store the change in time in this tick so it's easy to
+	detect re-renders.
+	*/
+	const [tick, setTick] = useState({timePassed: 0, id: null});
 	useEffect(() => {
-		prevTime = new Date().getTime();
-		setInterval(() => {
-			//console.log(`Tick ${tick.id}: ${tick.value}`);
-			let current = new Date().getTime();
-			tick.value = current - prevTime;
-			tick.id++;
-			prevTime = current;
-		}, 1000);
+		timer.setTimeSetter(setTick);
 	}, []);
 
 	return (
 		<div className="App">
-			<Pomodoro tick={tick} count={{counting, setCounting}}></Pomodoro>
+			<Pomodoro tick={tick} timer={timer}></Pomodoro>
 			<Tasks></Tasks>
 		</div>
 	);
