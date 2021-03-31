@@ -1,45 +1,35 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import Timer from './Timer';
-import Tasks from './Tasks';
+import Pomodoro from './components/Pomodoro';
+import Tasks from './components/Tasks';
 
 // time will be kept in milliseconds
 let prevTime = 0;
+const tick = {
+	value: 0,
+	id: 0
+}
 
 function App() {
 
-	/*
-	Updating the tick should always trigger a re-render. But often the
-	tick value will be the same as the previous tick value. So we wrap
-	the value in this object with a 'change'flag. This effect watches
-	the tick and sets the flag false after changing. 
-	*/
-	const [tick, setTick] = useState({value: 0, change: false});
-	useEffect(() => {
-		if (tick.change) {
-			setTick({
-				value: tick.value,
-				change: false
-			})
-		}
-	}, [tick])
+	console.log("app function run: " + tick.id);
+	const [counting, setCounting] = useState(false);
 
 	// On App start, create interval loop.
 	useEffect(() => {
 		prevTime = new Date().getTime();
 		setInterval(() => {
+			//console.log(`Tick ${tick.id}: ${tick.value}`);
 			let current = new Date().getTime();
-			setTick({
-				value: current - prevTime,
-				change: true
-			});
+			tick.value = current - prevTime;
+			tick.id++;
 			prevTime = current;
-		}, 100);
+		}, 1000);
 	}, []);
 
 	return (
 		<div className="App">
-			<Timer tick={tick}></Timer>
+			<Pomodoro tick={tick} count={{counting, setCounting}}></Pomodoro>
 			<Tasks></Tasks>
 		</div>
 	);
