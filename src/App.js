@@ -1,5 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
+import Timer from './util/Timer';
 import Pomodoro from './components/Pomodoro';
 import Tasks from './components/Tasks';
 
