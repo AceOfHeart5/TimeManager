@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { timeDisplay } from '../util/Utility';
 
 const Tasks = ({ app }) => {
 
@@ -13,6 +14,7 @@ const Tasks = ({ app }) => {
 
     const getTaskColor = (index) => {
         if (index !== app.tasks.currentTask) return 'grey';
+        if (app.timer.getRunning()) return 'green';
         return 'red';
     }
 
@@ -21,7 +23,7 @@ const Tasks = ({ app }) => {
         app.tasks.taskList.forEach((task, i) => {
             result.push(
                 <li key={i} style={{background: getTaskColor(i)}}>
-                    {task.name} : {task.time}
+                    {task.name} : {timeDisplay(task.time)}
                     <button onClick={() => app.deleteTask(i)}>Delete</button> 
                 </li>
             );

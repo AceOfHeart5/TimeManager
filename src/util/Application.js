@@ -48,6 +48,7 @@ export default class Application {
     }
 
     tick() {
+        this.tasks.addTime(this.timer.timePassed);
         this.updateState();
     }
 
