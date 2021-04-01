@@ -23,7 +23,8 @@ const Tasks = ({ app }) => {
         app.tasks.taskList.forEach((task, i) => {
             result.push(
                 <li key={i} style={{background: getTaskColor(i)}}>
-                    {task.name} : {timeDisplay(task.time)}
+                    <span onClick={() => app.setCurrentTask(i)}>{task.name} : {timeDisplay(task.time)}</span>
+                    <button onClick={() => app.setTaskTime(0, i)}>Reset</button>
                     <button onClick={() => app.deleteTask(i)}>Delete</button> 
                 </li>
             );

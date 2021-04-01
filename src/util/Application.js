@@ -66,4 +66,14 @@ export default class Application {
         this.tasks.deleteTask(index);
         this.updateState();
     }
+
+    setCurrentTask(index) {
+        this.tasks.setTask(index);
+        this.updateState();
+    }
+
+    setTaskTime(time, index) {
+        this.tasks.setTime(time, index);
+        this.updateState();
+    }
 }
