@@ -1,51 +1,18 @@
-import { useState, useEffect } from 'react';
-
-let tickPrevID = null;
-
-const Pomodoro = ({ tick, timer }) => {
-    const [time, setTime] = useState(0);
-
-    console.log("pomodoro re-rendered: " + time);
-
-    // newMins is the new time to set the time in minutes
-    const setTimer = (newMins) => {
-        setTime(newMins * 60 * 1000);
-    }
-
-    useEffect(() => {
-        console.log(`setting time to 25 minutes`);
-        setTimer(25);
-    }, []);
-
-    /*
-    When the pomodoro is re-rendered, we need to check if the tick value 
-    changed. We can be sure it's changed if the ID of the tick is 
-    different.
-    */
-    if (tick.id !== tickPrevID) {
-        tickPrevID = tick.id;
-        console.log(`Setting time to: ${time - tick.timePassed}`);
-        setTime(time - tick.timePassed);
-    }
+const Pomodoro = ({app}) => {
 
     // setMins is an array of integers representing minute values timer can be set to
     const getSetButtons = (setMins) => {
         const result = [];
         setMins.forEach(min => {
             result.push(
-                <li key={min}><button onClick={() => setTimer(min)} className="btn-set">{min}</button></li>
+                <li key={min}><button onClick={() => app.setTime(min)} className="btn-set">{min}</button></li>
             );
         });
         return <ul>{result}</ul>;
     }
 
-    const toggleTimer = () => {
-        timer.startToggle();
-    }
-
     const getDisplay = () => {
-        console.log(`Rendering time: ${time}`);
-        let temp = time;
+        let temp = app.timer.timeRemaining;
         let minutes = Math.floor(temp / 1000 / 60);
         temp -= (minutes * 60 * 1000);
         let seconds = Math.floor(temp / 1000);
@@ -63,13 +30,18 @@ const Pomodoro = ({ tick, timer }) => {
         return `${minutes}:${seconds}.${milliseconds}`;
     }
 
+    const getTimerColor = () => {
+        if (app.timer.getRunning()) return 'green';
+        else return 'red';
+    }
+
     return (
-        <div className="timer">
+        <div className="timer" style={{background: getTimerColor()}}>
             <h1 className="display">{getDisplay()}</h1>
-            <button onClick={toggleTimer} className="btn-startpause">start/pause</button>
+            <button onClick={() => app.startTimer()} className="btn-startpause">start/pause</button>
             {getSetButtons([1, 5, 10, 15, 25, 30])}
         </div>
     );
 }
 
-export default Pomodoro;
+ export default Pomodoro;
