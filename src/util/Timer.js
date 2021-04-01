@@ -1,3 +1,5 @@
+import alarm from '../media/alarm.wav';
+
 export default class Timer {
     constructor(startMins, onTickFunction) {
         this.timeRemaining = 0; // time is stored in milliseconds
@@ -6,6 +8,7 @@ export default class Timer {
         this.intervalID = null;
         this.onTick = onTickFunction; // function called each tick
         this.setTime(startMins);
+        this.alarm = new Audio(alarm);
     }
 
     setTime(mins) {
@@ -28,6 +31,7 @@ export default class Timer {
             this.timeRemaining -= this.timePassed;
             if (this.timeRemaining <= 0) {
                 this.timeRemaining = 0;
+                this.alarm.play();
                 this.stop();
             }
             if (typeof(this.onTick) === 'function') {
