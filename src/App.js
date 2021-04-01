@@ -8,7 +8,8 @@ const application = new Application();
 
 function App() {
 
-	const [stateID, setStateID] = useState(null);
+	// no need for state variable, since we only care about update
+	const [, setStateID] = useState(null);
 	useEffect(() => {
 		application.setStateSetter(setStateID);
 	}, [])

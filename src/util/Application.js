@@ -1,4 +1,5 @@
 import Timer from './Timer';
+import TaskManager from './TaskManager';
 
 /*
 This application object will keep track of everything the app needs. The `getState()` function will
@@ -12,6 +13,10 @@ export default class Application {
         this.stateID = 0;
         this.stateSetter = null;
         this.timer = new Timer(25, () => this.tick());
+        this.tasks = new TaskManager();
+        this.tasks.addTask('make cookies');
+        this.tasks.addTask('play video games');
+        this.tasks.addTask('watch netflix');
     }
 
     setStateSetter(v) {
@@ -48,6 +53,16 @@ export default class Application {
 
     startTimer() {
         this.timer.startToggle();
+        this.updateState();
+    }
+
+    // TASK MANAGER
+    addTask(name) {
+        this.tasks.addTask(name);
+    }
+
+    deleteTask(index) {
+        this.tasks.deleteTask(index);
         this.updateState();
     }
 }
