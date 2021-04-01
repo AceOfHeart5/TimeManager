@@ -14,6 +14,8 @@ export default class Application {
         this.stateSetter = null;
         this.timer = new Timer(25, () => this.tick());
         this.tasks = new TaskManager();
+
+        // add tasks for debugging/deving
         this.tasks.addTask('make cookies');
         this.tasks.addTask('play video games');
         this.tasks.addTask('watch netflix');
@@ -49,6 +51,9 @@ export default class Application {
 
     tick() {
         this.tasks.addTime(this.timer.timePassed);
+        if (!this.timer.getRunning()) {
+            this.tasks.deselectTask();
+        }
         this.updateState();
     }
 
@@ -60,6 +65,7 @@ export default class Application {
     // TASK MANAGER
     addTask(name) {
         this.tasks.addTask(name);
+        this.updateState();
     }
 
     deleteTask(index) {
