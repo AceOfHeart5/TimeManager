@@ -3,6 +3,7 @@
   text-align: center;
   display: flex;
   max-width: 1800px;
+  justify-content: center;
 }
 
 ul {
