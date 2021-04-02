@@ -18,10 +18,26 @@ const Pomodoro = ({app}) => {
         else return 'red';
     }
 
+    const currentTaskData = () => {
+        let name = ' ';
+        let time = ' ';
+        const task = app.tasks.getCurrentTask();
+        if (task !== undefined) {
+            name = task.name;
+            time = timeDisplay(task.time);
+        }
+        return(
+            [
+                <h4 key='task-title'>{name}</h4>,
+                <h5 key='task-time'>{time}</h5>
+            ]
+        );
+    }
+
     return (
         <div className="timer" style={{background: getTimerColor()}}>
             <h1 className="display">{timeDisplay(app.timer.timeRemaining)}</h1>
-            <h4>{window.innerWidth}</h4>
+            {currentTaskData()}
             <button onClick={() => app.startTimer()}>start/pause</button>
             {getSetButtons([1, 5, 10, 15, 25, 30])}
         </div>

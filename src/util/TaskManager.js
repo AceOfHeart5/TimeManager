@@ -35,6 +35,10 @@ export default class TaskManager {
         this.currentTask = index;
     }
 
+    getCurrentTask() {
+        return this.taskList[this.currentTask];
+    }
+
     deselectTask() {
         this.currentTask = -1;
     }
