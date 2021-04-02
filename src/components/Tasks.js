@@ -7,7 +7,6 @@ const Tasks = ({ app }) => {
 
     const addTask = (e) => {
         e.preventDefault();
-        console.log(`Add task: ${newTaskName}`);
         app.addTask(newTaskName);
         setNewTaskName('');
     }
@@ -34,11 +33,11 @@ const Tasks = ({ app }) => {
 
     return(
         <div className="tasks">
+            <h1>Tasks:</h1>
             <form onSubmit={addTask}>
                 <button>Add Task</button>
                 <input type="text" value={newTaskName} onChange={e => setNewTaskName(e.target.value)} placeholder='new task name...'/>
             </form>
-            <h1>Tasks:</h1>
             <ul>{getTasksList()}</ul>
         </div>
     )

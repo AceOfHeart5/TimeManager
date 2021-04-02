@@ -5,6 +5,14 @@ export default class TaskManager {
     }
 
     addTask(taskName) {
+        if (taskName === '') return;
+        let canAdd = true;
+        this.taskList.forEach(task => {
+            if (task.name === taskName) {
+                canAdd = false;
+            }
+        });
+        if (!canAdd) return;
         this.taskList.push({
             name: taskName,
             time: 0 // time spent on this task

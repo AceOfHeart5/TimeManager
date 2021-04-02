@@ -66,6 +66,7 @@ export default class Application {
     addTask(name) {
         this.tasks.addTask(name);
         this.updateState();
+        console.log(this.tasks.taskList);
     }
 
     deleteTask(index) {
