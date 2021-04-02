@@ -10,7 +10,7 @@ const Pomodoro = ({app}) => {
                 <li key={min}><button onClick={() => app.setTime(min)} className="btn-set">{min}</button></li>
             );
         });
-        return <ul>{result}</ul>;
+        return <ul className='reset-btns'>{result}</ul>;
     }
 
     const getTimerColor = () => {

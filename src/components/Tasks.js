@@ -31,9 +31,17 @@ const Tasks = ({ app }) => {
         return result;
     }
 
+    const getTitle = () => {
+        if (window.innerWidth >= 800) {
+            return (
+                <h1>Tasks:</h1>
+            );
+        }
+    }
+
     return(
         <div className="tasks">
-            <h1>Tasks:</h1>
+            {getTitle()}
             <form onSubmit={addTask}>
                 <button>Add Task</button>
                 <input type="text" value={newTaskName} onChange={e => setNewTaskName(e.target.value)} placeholder='new task name...'/>

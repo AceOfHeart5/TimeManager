@@ -1,18 +1,26 @@
+/* styling will be for mobile first */
+
 .App {
   margin: 0 auto;
   text-align: center;
-  display: flex;
-  max-width: 1800px;
+  max-width: 1200px;
   justify-content: center;
+}
+
+h1 {
+  margin: 0;
 }
 
 ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .timer {
-  padding: 0 10px;
+  padding: 10px 10px;
+  position: sticky;
+  top: 0;
 }
 
 .timer-display {
@@ -30,6 +38,30 @@ ul {
   min-height: 21px;
 }
 
+.reset-btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .tasks {
+  padding-top: 20px;
   background: #aaa;
+}
+
+/* adjust for desktops and other large screens here */
+@media screen and (min-width: 800px) {
+  .App {
+    display: flex;
+  }
+
+  .timer {
+    width: 40%;
+    position: relative;
+  }
+
+  .tasks {
+    padding-top: 0;
+    width: 60%;
+  }
 }
