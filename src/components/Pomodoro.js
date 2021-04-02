@@ -21,6 +21,7 @@ const Pomodoro = ({app}) => {
     return (
         <div className="timer" style={{background: getTimerColor()}}>
             <h1 className="display">{timeDisplay(app.timer.timeRemaining)}</h1>
+            <h4>{window.innerWidth}</h4>
             <button onClick={() => app.startTimer()}>start/pause</button>
             {getSetButtons([1, 5, 10, 15, 25, 30])}
         </div>

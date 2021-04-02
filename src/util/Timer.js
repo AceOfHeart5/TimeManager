@@ -23,7 +23,7 @@ export default class Timer {
             const t = new Date().getTime();
             this.timePassed = t - this.timePrevious;
 
-            this.timePassed *= 1000; // greater speed for debugging
+            this.timePassed *= 1; // greater speed for debugging
 
             if (this.timePassed >= this.timeRemaining) {
                 this.timePassed = this.timeRemaining;

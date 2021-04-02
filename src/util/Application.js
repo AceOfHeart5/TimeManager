@@ -19,6 +19,8 @@ export default class Application {
         this.tasks.addTask('make cookies');
         this.tasks.addTask('play video games');
         this.tasks.addTask('watch netflix');
+
+        window.addEventListener('resize', () => this.updateState());
     }
 
     setStateSetter(v) {
