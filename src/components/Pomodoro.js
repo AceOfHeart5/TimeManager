@@ -28,15 +28,15 @@ const Pomodoro = ({app}) => {
         }
         return(
             [
-                <h4 key='task-title'>{name}</h4>,
-                <h5 key='task-time'>{time}</h5>
+                <h4 key='name' className='timer-task-name'>{name}</h4>,
+                <h5 key='time' className='timer-task-time'>{time}</h5>
             ]
         );
     }
 
     return (
         <div className="timer" style={{background: getTimerColor()}}>
-            <h1 className="display">{timeDisplay(app.timer.timeRemaining)}</h1>
+            <h1 className="timer-display">{timeDisplay(app.timer.timeRemaining)}</h1>
             {currentTaskData()}
             <button onClick={() => app.startTimer()}>start/pause</button>
             {getSetButtons([1, 5, 10, 15, 25, 30])}
