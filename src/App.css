@@ -54,6 +54,10 @@ ul {
   background: #aaa;
 }
 
+.task-name:hover {
+  cursor: pointer;
+}
+
 /* adjust for desktops and other large screens here */
 @media screen and (min-width: 800px) {
   .App {
