@@ -19,7 +19,10 @@ export default class Application {
         this.tasks.addTask('make cookies');
         this.tasks.addTask('play video games');
         this.tasks.addTask('watch netflix');
+        this.tasks.addTask('apply to 300 jobs');
+        this.tasks.addTask('create a visual novel');
         this.tasks.addTask('a task with a really long name that will let me test how line wrapping will affect the app');
+        this.tasks.addTask('figure out css stylings');
 
         window.addEventListener('resize', () => this.updateState());
     }

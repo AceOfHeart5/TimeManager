@@ -42,7 +42,7 @@ const Tasks = ({ app }) => {
     return(
         <div className="tasks">
             {getTitle()}
-            <form onSubmit={addTask}>
+            <form className='task-add' onSubmit={addTask}>
                 <button>Add Task</button>
                 <input type="text" value={newTaskName} onChange={e => setNewTaskName(e.target.value)} placeholder='new task name...'/>
             </form>

@@ -29,7 +29,7 @@ ul {
 }
 
 .btn-timer {
-  font-size: 2.5em;
+  font-size: 2em;
 }
 
 .timer-task-name {
@@ -50,12 +50,18 @@ ul {
 }
 
 .tasks {
-  padding-top: 10px;
   background: #aaa;
 }
 
 .task-name:hover {
   cursor: pointer;
+}
+
+.task-add {
+  top: 262.5px;
+  padding-top: 10px;
+  position: sticky;
+  background: #aaa;
 }
 
 /* adjust for desktops and other large screens here */
@@ -72,5 +78,10 @@ ul {
   .tasks {
     padding-top: 0;
     width: 60%;
+  }
+
+  .task-add {
+    position: relative;
+    top: 0;
   }
 }
