@@ -1,3 +1,4 @@
+import AddTask from './AddTask';
 import { timeDisplay } from '../util/Utility';
 
 const Pomodoro = ({app}) => {
@@ -34,12 +35,19 @@ const Pomodoro = ({app}) => {
         );
     }
 
+    const getAddTask = () => {
+        if (window.innerWidth < 800) {
+            return (<AddTask app={app}></AddTask>);
+        }
+    }
+
     return (
         <div className="timer" style={{background: getTimerColor()}}>
             <h1 className="timer-display">{timeDisplay(app.timer.timeRemaining)}</h1>
             {currentTaskData()}
             <button className='btn-timer' onClick={() => app.startTimer()}>start/pause</button>
             {getSetButtons([1, 5, 10, 15, 25, 30])}
+            {getAddTask()}
         </div>
     );
 }

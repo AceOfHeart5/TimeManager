@@ -4,14 +4,6 @@ import AddTask from './AddTask';
 
 const Tasks = ({ app }) => {
 
-    const [newTaskName, setNewTaskName] = useState('');
-
-    const addTask = (e) => {
-        e.preventDefault();
-        app.addTask(newTaskName);
-        setNewTaskName('');
-    }
-
     const getTaskColor = (index) => {
         if (index !== app.tasks.currentTask) return 'grey';
         if (app.timer.getRunning()) return 'green';
@@ -34,16 +26,16 @@ const Tasks = ({ app }) => {
 
     const getTitle = () => {
         if (window.innerWidth >= 800) {
-            return (
-                <h1>Tasks:</h1>
-            );
+            return ([
+                <h1 key='title'>Tasks:</h1>,
+                <AddTask app={app} key='add'></AddTask>
+            ]);
         }
     }
 
     return(
         <div className="tasks">
             {getTitle()}
-            <AddTask app={app}></AddTask>
             <ul>{getTasksList()}</ul>
         </div>
     )
