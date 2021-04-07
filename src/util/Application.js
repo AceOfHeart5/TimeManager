@@ -16,10 +16,10 @@ export default class Application {
         this.tasks = new TaskManager();
 
         // add tasks for debugging/deving
-        this.tasks.addTask('make cookies');
-        this.tasks.addTask('play video games');
-        this.tasks.addTask('watch netflix');
-        this.tasks.addTask('a task with a really long name that will let me test how line wrapping will affect the app');
+        //this.tasks.addTask('make cookies');
+        //this.tasks.addTask('play video games');
+        //this.tasks.addTask('watch netflix');
+        //this.tasks.addTask('a task with a really long name that will let me test how line wrapping will affect the app');
 
         window.addEventListener('resize', () => this.updateState());
     }
