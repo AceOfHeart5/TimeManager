@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { timeDisplay } from '../util/Utility';
+import AddTask from './AddTask';
 
 const Tasks = ({ app }) => {
 
@@ -42,10 +43,7 @@ const Tasks = ({ app }) => {
     return(
         <div className="tasks">
             {getTitle()}
-            <form className='task-add' onSubmit={addTask}>
-                <button>Add Task</button>
-                <input type="text" value={newTaskName} onChange={e => setNewTaskName(e.target.value)} placeholder='new task name...'/>
-            </form>
+            <AddTask app={app}></AddTask>
             <ul>{getTasksList()}</ul>
         </div>
     )
