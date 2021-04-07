@@ -24,7 +24,12 @@ ul {
 }
 
 .timer-display {
+  font-size: 5em;
   margin-bottom: 0;
+}
+
+.btn-timer {
+  font-size: 2.5em;
 }
 
 .timer-task-name {

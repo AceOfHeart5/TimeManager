@@ -38,7 +38,7 @@ const Pomodoro = ({app}) => {
         <div className="timer" style={{background: getTimerColor()}}>
             <h1 className="timer-display">{timeDisplay(app.timer.timeRemaining)}</h1>
             {currentTaskData()}
-            <button onClick={() => app.startTimer()}>start/pause</button>
+            <button className='btn-timer' onClick={() => app.startTimer()}>start/pause</button>
             {getSetButtons([1, 5, 10, 15, 25, 30])}
         </div>
     );
