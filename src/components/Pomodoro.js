@@ -10,8 +10,8 @@ const Pomodoro = ({app}) => {
     }
 
     const currentTaskData = () => {
-        let name = ' ';
-        let time = ' ';
+        let name = 'Add task and select it.';
+        let time = 'Click the timer to start.';
         const task = app.tasks.getCurrentTask();
         if (task !== undefined) {
             name = task.name;
