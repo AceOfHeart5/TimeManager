@@ -4,17 +4,6 @@ import { timeDisplay } from '../util/Utility';
 
 const Pomodoro = ({app}) => {
 
-    // setMins is an array of integers representing minute values timer can be set to
-    const getSetButtons = (setMins) => {
-        const result = [];
-        setMins.forEach(min => {
-            result.push(
-                <li key={min}><button onClick={() => app.setTime(min)} className="btn-set">{min}</button></li>
-            );
-        });
-        return <ul className='reset-btns'>{result}</ul>;
-    }
-
     const getTimerColor = () => {
         if (app.timer.getRunning()) return 'green';
         else return 'red';
