@@ -49,6 +49,7 @@ ul {
 
 .timer-setter input {
   font-size: 1.2em;
+  max-width: 60px;
 }
 
 .reset-btns {

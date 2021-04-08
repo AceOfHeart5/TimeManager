@@ -8,7 +8,7 @@ export default function TimeSetter({app}) {
 
     const adjustTime = (value) => {
         const number = Number.parseInt(time);
-        if (isNaN(number)) {
+        if (isNaN(number) || (number + value) < 1) {
             setTime(lastValid);
         } else {
             const newTime = number + value;
@@ -20,10 +20,11 @@ export default function TimeSetter({app}) {
     const setTimer = (e) => {
         e.preventDefault();
         const number = Number.parseInt(time);
-        if (isNaN(number)) {
+        if (isNaN(number) || number < 1) {
             setTime(lastValid);
         } else {
             app.setTime(number);
+            setLastValid(number.toString());
         }
     }
 
@@ -32,7 +33,7 @@ export default function TimeSetter({app}) {
             <button type='button' onClick={() => adjustTime(-1)}>-</button>
             <input value={time} onChange={e => setTime(e.target.value)} type="text"/>
             <button type='button' onClick={() => adjustTime(1)}>+</button>
-            <button type='submit' onClick={setTimer}>set</button>
+            <button type='submit' onClick={setTimer}>set minutes</button>
         </form>
     );
 }
