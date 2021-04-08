@@ -32,8 +32,8 @@ ul {
   margin-bottom: 0;
 }
 
-.btn-timer {
-  font-size: 1.5em;
+.timer-display:hover {
+  cursor: pointer;
 }
 
 .timer-task-name {

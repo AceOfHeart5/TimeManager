@@ -31,16 +31,10 @@ const Pomodoro = ({app}) => {
         }
     }
 
-    const getStartPause = () => {
-        if (app.timer.getRunning()) return 'PAUSE';
-        return 'START';
-    }
-
     return (
         <div className="timer" style={{background: getTimerColor()}}>
-            <h1 className="timer-display">{timeDisplay(app.timer.timeRemaining)}</h1>
+            <h1 className="timer-display" onClick={() => app.startTimer()}>{timeDisplay(app.timer.timeRemaining)}</h1>
             {currentTaskData()}
-            <button className='btn-timer' onClick={() => app.startTimer()}>{getStartPause()}</button>
             <TimeSetter app={app}></TimeSetter>
             {getAddTask()}
         </div>
