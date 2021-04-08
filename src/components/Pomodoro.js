@@ -1,3 +1,4 @@
+import TimeSetter from './TimeSetter';
 import AddTask from './AddTask';
 import { timeDisplay } from '../util/Utility';
 
@@ -46,7 +47,8 @@ const Pomodoro = ({app}) => {
             <h1 className="timer-display">{timeDisplay(app.timer.timeRemaining)}</h1>
             {currentTaskData()}
             <button className='btn-timer' onClick={() => app.startTimer()}>start/pause</button>
-            {getSetButtons([1, 5, 10, 15, 25, 30])}
+            {/*getSetButtons([1, 5, 10, 15, 25, 30])*/}
+            <TimeSetter app={app}></TimeSetter>
             {getAddTask()}
         </div>
     );
