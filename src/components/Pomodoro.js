@@ -1,18 +1,8 @@
+import TimeSetter from './TimeSetter';
 import AddTask from './AddTask';
 import { timeDisplay } from '../util/Utility';
 
 const Pomodoro = ({app}) => {
-
-    // setMins is an array of integers representing minute values timer can be set to
-    const getSetButtons = (setMins) => {
-        const result = [];
-        setMins.forEach(min => {
-            result.push(
-                <li key={min}><button onClick={() => app.setTime(min)} className="btn-set">{min}</button></li>
-            );
-        });
-        return <ul className='reset-btns'>{result}</ul>;
-    }
 
     const getTimerColor = () => {
         if (app.timer.getRunning()) return 'green';
@@ -46,7 +36,8 @@ const Pomodoro = ({app}) => {
             <h1 className="timer-display">{timeDisplay(app.timer.timeRemaining)}</h1>
             {currentTaskData()}
             <button className='btn-timer' onClick={() => app.startTimer()}>start/pause</button>
-            {getSetButtons([1, 5, 10, 15, 25, 30])}
+            {/*getSetButtons([1, 5, 10, 15, 25, 30])*/}
+            <TimeSetter app={app}></TimeSetter>
             {getAddTask()}
         </div>
     );
