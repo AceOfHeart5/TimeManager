@@ -47,6 +47,10 @@ ul {
   min-height: 21px;
 }
 
+.timer-setter input {
+  font-size: 1.2em;
+}
+
 .reset-btns {
   display: flex;
   flex-direction: row;
