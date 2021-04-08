@@ -22,7 +22,7 @@ ul {
 }
 
 .timer {
-  padding: 10px 10px;
+  padding: 0;
   position: sticky;
   top: 0;
 }
@@ -33,7 +33,7 @@ ul {
 }
 
 .btn-timer {
-  font-size: 2em;
+  font-size: 1.5em;
 }
 
 .timer-task-name {
@@ -49,7 +49,7 @@ ul {
 
 .timer-setter input {
   font-size: 1.2em;
-  max-width: 60px;
+  max-width: 40px;
 }
 
 .reset-btns {
@@ -67,8 +67,7 @@ ul {
 }
 
 .task-add {
-  top: 262.5px;
-  padding: 10px 0px;
+  padding: 0px;
   position: sticky;
   background: #aaa;
   justify-content: center;

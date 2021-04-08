@@ -32,8 +32,8 @@ const Pomodoro = ({app}) => {
     }
 
     const getStartPause = () => {
-        if (app.timer.getRunning()) return 'pause';
-        return 'start';
+        if (app.timer.getRunning()) return 'PAUSE';
+        return 'START';
     }
 
     return (
